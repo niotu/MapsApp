@@ -36,6 +36,7 @@ class MainPage(QMainWindow, Ui_MainWindow):
         self.mapParser.search_place(self.mapParser.search_place(self.lineEdit.text()))
         self.mapParser.get_map_image()
         self.show_map()
+        self.maps_view.setFocus()
 
     def mousePressEvent(self, event):
         if event.button() == Qt.RightButton:

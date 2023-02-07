@@ -39,6 +39,7 @@ class MapParser:
         self.spn = None
         self.layer = "sat,skl"
         self.zoom = 10
+        self.point = None
 
     def get_map_image(self):
         s = requests.Session()
@@ -72,7 +73,7 @@ class MapParser:
         toponym = json_response["response"]["GeoObjectCollection"][
             "featureMember"][0]["GeoObject"]
         self.ll, spn = get_params(toponym)
-
+        self.point = ",".join(self.ll)
         # Собираем параметры для запроса к StaticMapsAPI:
         self.refresh_map()
 
@@ -80,6 +81,6 @@ class MapParser:
         self.map_params = {
             "ll": ",".join(self.ll),
             "l": self.layer,
-            "pt": ",".join(self.ll),
+            "pt": self.point,
             "z": self.zoom
         }
