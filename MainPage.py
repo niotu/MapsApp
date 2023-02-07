@@ -24,10 +24,15 @@ class MainPage(QMainWindow, Ui_MainWindow):
         self.mapParser = MapParser()
 
         self.show_map()
+        self.maps_view.setFocus()
 
     def check_for_index(self):
         self.check_click_for_index = not self.check_click_for_index
         self.mapParser.search_place()
+
+    def mousePressEvent(self, event):
+        self.set_layer()
+        print(self.layer)
 
     def set_layer(self):
         if self.layer_map_btn.isChecked():
@@ -36,6 +41,7 @@ class MainPage(QMainWindow, Ui_MainWindow):
             self.layer = 'sat'
         else:
             self.layer = 'sat,skl'
+
 
     def show_map(self):
         # loading map image
