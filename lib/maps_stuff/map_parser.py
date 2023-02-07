@@ -32,11 +32,13 @@ class MapParser:
             "ll": None,
             "spn": None,
             "l": "map",
-            "pt": None
+            "pt": None,
+            "z": 10
         }
         self.ll = None
         self.spn = None
         self.layer = "sat,skl"
+        self.zoom = 10
 
     def get_map_image(self):
         s = requests.Session()
@@ -48,6 +50,14 @@ class MapParser:
 
     def change_layer(self, layer):
         self.layer = layer
+        self.map_params["l"] = self.layer
+
+    def move(self, dx, dy):
+        # print(self.ll)
+        self.ll[0] = str(float(self.ll[0]) + dx)
+        self.ll[1] = str(float(self.ll[1]) + dy)
+        res = ",".join(self.ll)
+        self.map_params["ll"] = res
 
     def search_place(self, toponym_to_find):
         self.geocoder_params["geocode"] = toponym_to_find
@@ -61,12 +71,15 @@ class MapParser:
         # Получаем первый топоним из ответа геокодера.
         toponym = json_response["response"]["GeoObjectCollection"][
             "featureMember"][0]["GeoObject"]
-        ll, spn = get_params(toponym)
+        self.ll, spn = get_params(toponym)
 
         # Собираем параметры для запроса к StaticMapsAPI:
+        self.refresh_map()
+
+    def refresh_map(self):
         self.map_params = {
-            "ll": ",".join(ll),
-            "spn": spn,
+            "ll": ",".join(self.ll),
             "l": self.layer,
-            "pt": ",".join(ll)
+            "pt": ",".join(self.ll),
+            "z": self.zoom
         }
