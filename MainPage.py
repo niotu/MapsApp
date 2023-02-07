@@ -25,10 +25,13 @@ class MainPage(QMainWindow, Ui_MainWindow):
 
         self.show_map()
         self.maps_view.setFocus()
+        self.search_button.clicked.connect(self.check_for_index)
 
     def check_for_index(self):
-        self.check_click_for_index = not self.check_click_for_index
-        self.mapParser.search_place()
+        self.check_click_for_index = not self.check_for_index
+        self.mapParser.search_place(self.mapParser.search_place(self.lineEdit.text()))
+        self.mapParser.get_map_image()
+        self.show_map()
 
     def mousePressEvent(self, event):
         if event.button() == Qt.RightButton:
@@ -37,6 +40,7 @@ class MainPage(QMainWindow, Ui_MainWindow):
         self.set_layer()
 
         print(self.layer)
+        self.check_for_index()
 
     def set_layer(self):
         if self.layer_map_btn.isChecked():
@@ -45,6 +49,7 @@ class MainPage(QMainWindow, Ui_MainWindow):
             self.layer = 'sat'
         else:
             self.layer = 'sat,skl'
+        self.mapParser.change_layer(self.layer)
 
 
     def show_map(self):
