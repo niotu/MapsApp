@@ -45,4 +45,4 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
         self.lineEdit.setPlaceholderText(_translate("MainWindow", "поиск..."))
-        self.label.setText(_translate("MainWindow", "TextLabel"))
+        self.maps_view.setText(_translate("MainWindow", "TextLabel"))
