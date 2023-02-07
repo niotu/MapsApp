@@ -1,2 +1,3 @@
 # MapsApp
 
+Yandex MapsAPI application
