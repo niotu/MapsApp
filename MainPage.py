@@ -31,7 +31,11 @@ class MainPage(QMainWindow, Ui_MainWindow):
         self.mapParser.search_place()
 
     def mousePressEvent(self, event):
+        if event.button() == Qt.RightButton:
+            print(event.pos())
+
         self.set_layer()
+
         print(self.layer)
 
     def set_layer(self):
