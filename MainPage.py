@@ -14,7 +14,7 @@ class MainPage(QMainWindow, Ui_MainWindow):
         self.v_shift = 0  # Сдвиг карты по вертикали
         self.h_shift = 0  # Сдвиг карты по горизонтали
 
-        self.zoom = 1  # Показатель зума
+        self.zoom = 10  # Показатель зума
 
         self.layer = 'map'  # текущий слой
 
@@ -25,18 +25,26 @@ class MainPage(QMainWindow, Ui_MainWindow):
 
         self.show_map()
         self.maps_view.setFocus()
+        self.search_button.clicked.connect(self.check_for_index)
+        self.layer_map_btn.clicked.connect(self.set_layer)
+        self.layer_sat_btn.clicked.connect(self.set_layer)
+        self.radioButton_3.clicked.connect(self.set_layer)
+        # self.s
 
     def check_for_index(self):
-        self.check_click_for_index = not self.check_click_for_index
-        self.mapParser.search_place()
+        self.check_click_for_index = not self.check_for_index
+        self.mapParser.search_place(self.mapParser.search_place(self.lineEdit.text()))
+        self.mapParser.get_map_image()
+        self.show_map()
+        self.maps_view.setFocus()
 
     def mousePressEvent(self, event):
         if event.button() == Qt.RightButton:
             print(event.pos())
-
         self.set_layer()
 
         print(self.layer)
+        self.show_map()
 
     def set_layer(self):
         if self.layer_map_btn.isChecked():
@@ -45,7 +53,8 @@ class MainPage(QMainWindow, Ui_MainWindow):
             self.layer = 'sat'
         else:
             self.layer = 'sat,skl'
-
+        self.mapParser.change_layer(self.layer)
+        self.show_map()
 
     def show_map(self):
         # loading map image
@@ -56,22 +65,29 @@ class MainPage(QMainWindow, Ui_MainWindow):
         self.maps_view.setPixmap(map)
 
     def keyPressEvent(self, event):
+        v_shift = 0
+        h_shift = 0
+        speed = 1 / self.zoom
+        if event.key() == Qt.Key_Escape:
+            self.maps_view.setFocus()
+            print(1)
         if event.key() == Qt.Key_PageUp:
-            if self.zoom / 1.5 > 0.001:
-                self.zoom /= 1.5
+            if self.zoom < 17:
+                self.zoom += 1
         elif event.key() == Qt.Key_PageDown:
-            if self.zoom * 1.5 < 90:
-                self.zoom *= 1.5
+            if self.zoom > 1:
+                self.zoom -= 1
         if event.key() == Qt.Key_Left:
-            if 0 < self.h_shift - self.zoom < 180:
-                self.h_shift -= self.zoom
+            h_shift -= speed
         if event.key() == Qt.Key_Up:
-            if -90 < self.v_shift + self.zoom < 90:
-                self.v_shift += self.zoom
+            v_shift += speed
         if event.key() == Qt.Key_Right:
-            if 0 < self.h_shift + self.zoom < 180:
-                self.h_shift += self.zoom
+            h_shift += speed
         if event.key() == Qt.Key_Down:
-            if -90 < self.v_shift - self.zoom < 90:
-                self.v_shift -= self.zoom
-        print(f'zoom: {self.zoom},h_shift: {self.h_shift},v_shift {self.v_shift}')
+            v_shift -= speed
+        self.mapParser.zoom = self.zoom
+        self.mapParser.move(h_shift, v_shift)
+        self.mapParser.refresh_map()
+        self.show_map()
+        print(f'zoom: {self.zoom},h_shift: {h_shift},v_shift {v_shift}')
+
