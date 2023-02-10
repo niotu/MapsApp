@@ -143,6 +143,6 @@ class Ui_MainWindow(object):
         self.search_button.setText(_translate("MainWindow", "Искать"))
         self.adress_label.setText(_translate("MainWindow", "TextLabel"))
         self.reset_button.setText(_translate("MainWindow", "Сбросить"))
-        self.layer_sat_btn.setText(_translate("MainWindow", "Карта"))
-        self.layer_map_btn.setText(_translate("MainWindow", "Спутник"))
+        self.layer_sat_btn.setText(_translate("MainWindow", "Спутник"))
+        self.layer_map_btn.setText(_translate("MainWindow", "Карта"))
         self.radioButton_3.setText(_translate("MainWindow", "Гибрид"))
