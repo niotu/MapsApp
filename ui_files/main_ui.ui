@@ -1,125 +1,164 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
-  <property name="geometry">
-   <rect>
-    <x>0</x>
-    <y>0</y>
-    <width>597</width>
-    <height>554</height>
-   </rect>
-  </property>
-  <property name="windowTitle">
-   <string>MainWindow</string>
-  </property>
-  <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout_2">
-    <item>
-     <layout class="QGridLayout" name="gridLayout">
-      <item row="1" column="0">
-       <layout class="QHBoxLayout" name="horizontalLayout_3">
-        <item>
-         <widget class="QLineEdit" name="lineEdit">
-          <property name="sizePolicy">
-           <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
-            <horstretch>0</horstretch>
-            <verstretch>50</verstretch>
-           </sizepolicy>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">border: 2px solid transparent;
-border-bottom: 3px ridge #0A0A0A;
-background: transparent;</string>
-          </property>
-          <property name="text">
-           <string/>
-          </property>
-          <property name="placeholderText">
-           <string>поиск...</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QPushButton" name="search_button">
-          <property name="styleSheet">
-           <string notr="true">background: #9E9E9E;
-                       border-radius: 5px;
-                        position: absolute;
-                        font-family: &quot;Inter&quot;;
-                        font-style: normal;
-                       font-weight: 400;
-                        font-size: 32px;
-                        line-height: 39px;
-                        text-align: center;
-                        color: #000000;</string>
-          </property>
-          <property name="text">
-           <string>Искать</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item row="2" column="0">
-       <layout class="QVBoxLayout" name="verticalLayout">
-        <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_2">
-          <item>
-           <widget class="QRadioButton" name="layer_sat_btn">
-            <property name="text">
-             <string>Карта</string>
-            </property>
-            <attribute name="buttonGroup">
-             <string notr="true">buttonGroup</string>
-            </attribute>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="layer_map_btn">
-            <property name="text">
-             <string>Спутник</string>
-            </property>
-            <attribute name="buttonGroup">
-             <string notr="true">buttonGroup</string>
-            </attribute>
-           </widget>
-          </item>
-          <item>
-           <widget class="QRadioButton" name="radioButton_3">
-            <property name="text">
-             <string>Гибрид</string>
-            </property>
-            <attribute name="buttonGroup">
-             <string notr="true">buttonGroup</string>
-            </attribute>
-           </widget>
-          </item>
-         </layout>
-        </item>
-       </layout>
-      </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="maps_view">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
+    <class>MainWindow</class>
+    <widget class="QMainWindow" name="MainWindow">
+        <property name="geometry">
+            <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>597</width>
+                <height>603</height>
+            </rect>
         </property>
-        <property name="text">
-         <string>TextLabel</string>
+        <property name="windowTitle">
+            <string>MainWindow</string>
         </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-   </layout>
-  </widget>
- </widget>
- <resources/>
- <connections/>
- <buttongroups>
-  <buttongroup name="buttonGroup"/>
- </buttongroups>
+        <widget class="QWidget" name="centralwidget">
+            <layout class="QGridLayout" name="gridLayout_2">
+                <item row="0" column="0">
+                    <layout class="QGridLayout" name="gridLayout">
+                        <item row="0" column="0">
+                            <widget class="QLabel" name="maps_view">
+                                <property name="sizePolicy">
+                                    <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                                        <horstretch>0</horstretch>
+                                        <verstretch>0</verstretch>
+                                    </sizepolicy>
+                                </property>
+                                <property name="text">
+                                    <string>TextLabel</string>
+                                </property>
+                            </widget>
+                        </item>
+                        <item row="1" column="0">
+                            <layout class="QHBoxLayout" name="horizontalLayout_3">
+                                <item>
+                                    <widget class="QLineEdit" name="lineEdit">
+                                        <property name="sizePolicy">
+                                            <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                                                <horstretch>0</horstretch>
+                                                <verstretch>50</verstretch>
+                                            </sizepolicy>
+                                        </property>
+                                        <property name="styleSheet">
+                                            <string notr="true">border: 2px solid transparent;
+                                                border-bottom: 3px ridge #0A0A0A;
+                                                background: transparent;
+                                            </string>
+                                        </property>
+                                        <property name="text">
+                                            <string/>
+                                        </property>
+                                        <property name="placeholderText">
+                                            <string>поиск...</string>
+                                        </property>
+                                    </widget>
+                                </item>
+                                <item>
+                                    <widget class="QPushButton" name="search_button">
+                                        <property name="styleSheet">
+                                            <string notr="true">background: #9E9E9E;
+                                                border-radius: 5px;
+                                                position: absolute;
+                                                font-family: &quot;Inter&quot;;
+                                                font-style: normal;
+                                                font-weight: 400;
+                                                font-size: 32px;
+                                                line-height: 39px;
+                                                text-align: center;
+                                                color: #000000;
+                                            </string>
+                                        </property>
+                                        <property name="text">
+                                            <string>Искать</string>
+                                        </property>
+                                    </widget>
+                                </item>
+                            </layout>
+                        </item>
+                        <item row="2" column="0">
+                            <layout class="QHBoxLayout" name="horizontalLayout">
+                                <item>
+                                    <widget class="QLabel" name="adress_label">
+                                        <property name="styleSheet">
+                                            <string notr="true">border: 2px solid transparent;
+                                                border-bottom: 3px ridge #0A0A0A;
+                                                background: transparent;
+                                            </string>
+                                        </property>
+                                        <property name="text">
+                                            <string>TextLabel</string>
+                                        </property>
+                                    </widget>
+                                </item>
+                                <item>
+                                    <widget class="QPushButton" name="reset_button">
+                                        <property name="styleSheet">
+                                            <string notr="true">background: #9E9E9E;
+                                                border-radius: 5px;
+                                                position: absolute;
+                                                font-family: &quot;Inter&quot;;
+                                                font-style: normal;
+                                                font-weight: 400;
+                                                font-size: 32px;
+                                                line-height: 39px;
+                                                text-align: center;
+                                                color: #000000;
+                                            </string>
+                                        </property>
+                                        <property name="text">
+                                            <string>Сбросить</string>
+                                        </property>
+                                    </widget>
+                                </item>
+                            </layout>
+                        </item>
+                        <item row="3" column="0">
+                            <layout class="QVBoxLayout" name="verticalLayout">
+                                <item>
+                                    <layout class="QHBoxLayout" name="horizontalLayout_2">
+                                        <item>
+                                            <widget class="QRadioButton" name="layer_sat_btn">
+                                                <property name="text">
+                                                    <string>Карта</string>
+                                                </property>
+                                                <attribute name="buttonGroup">
+                                                    <string notr="true">buttonGroup</string>
+                                                </attribute>
+                                            </widget>
+                                        </item>
+                                        <item>
+                                            <widget class="QRadioButton" name="layer_map_btn">
+                                                <property name="text">
+                                                    <string>Спутник</string>
+                                                </property>
+                                                <attribute name="buttonGroup">
+                                                    <string notr="true">buttonGroup</string>
+                                                </attribute>
+                                            </widget>
+                                        </item>
+                                        <item>
+                                            <widget class="QRadioButton" name="radioButton_3">
+                                                <property name="text">
+                                                    <string>Гибрид</string>
+                                                </property>
+                                                <attribute name="buttonGroup">
+                                                    <string notr="true">buttonGroup</string>
+                                                </attribute>
+                                            </widget>
+                                        </item>
+                                    </layout>
+                                </item>
+                            </layout>
+                        </item>
+                    </layout>
+                </item>
+            </layout>
+        </widget>
+    </widget>
+    <resources/>
+    <connections/>
+    <buttongroups>
+        <buttongroup name="buttonGroup"/>
+    </buttongroups>
 </ui>

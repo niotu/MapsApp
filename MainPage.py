@@ -11,6 +11,29 @@ class MainPage(QMainWindow, Ui_MainWindow):
         super().__init__()
 
         self.setupUi(self)
+
+        '''нужно добавить дефолтное положение карты, например нью-йорк'''
+
+        self.v_shift = 0  # Сдвиг карты по вертикали
+        self.h_shift = 0  # Сдвиг карты по горизонтали
+        self.zoom = 10  # Показатель зума
+
+        self.layer = 'map'  # текущий слой
+
+        self.check_click_for_index = False  # показатель из 9 задачи
+        self.point = None  # показатель из 6 задачи
+        self.set_adress('...')
+        self.mapParser = MapParser()
+
+        self.show_map()
+        self.maps_view.setFocus()
+        self.search_button.clicked.connect(self.check_for_index)
+        self.layer_map_btn.clicked.connect(self.set_layer)
+        self.layer_sat_btn.clicked.connect(self.set_layer)
+        self.radioButton_3.clicked.connect(self.set_layer)
+        self.reset_button.clicked.connect(self.reset)
+
+    def reset(self):
         self.v_shift = 0  # Сдвиг карты по вертикали
         self.h_shift = 0  # Сдвиг карты по горизонтали
 
@@ -21,15 +44,7 @@ class MainPage(QMainWindow, Ui_MainWindow):
         self.check_click_for_index = False  # показатель из 9 задачи
         self.point = None  # показатель из 6 задачи
 
-        self.mapParser = MapParser()
-
-        self.show_map()
-        self.maps_view.setFocus()
-        self.search_button.clicked.connect(self.check_for_index)
-        self.layer_map_btn.clicked.connect(self.set_layer)
-        self.layer_sat_btn.clicked.connect(self.set_layer)
-        self.radioButton_3.clicked.connect(self.set_layer)
-        # self.s
+        self.set_adress('...')
 
     def check_for_index(self):
         self.check_click_for_index = not self.check_for_index
@@ -91,3 +106,5 @@ class MainPage(QMainWindow, Ui_MainWindow):
         self.show_map()
         print(f'zoom: {self.zoom},h_shift: {h_shift},v_shift {v_shift}')
 
+    def set_adress(self, adress):
+        self.adress_label.setText(adress)
