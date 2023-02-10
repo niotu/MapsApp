@@ -44,7 +44,7 @@ class MainPage(QMainWindow, Ui_MainWindow):
 
         self.check_click_for_index = False  # показатель из 9 задачи
         self.mapParser.reset()  # показатель из 6 задачи
-
+        self.lineEdit.setText("")
         self.set_adress('...')
         self.checkBox.setChecked(False)
         self.show_map()
