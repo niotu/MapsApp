@@ -53,6 +53,10 @@ class MapParser:
         self.layer = layer
         self.map_params["l"] = self.layer
 
+    def clear_point(self):
+        self.point = None
+        self.refresh_map()
+
     def move(self, dx, dy):
         # print(self.ll)
         self.ll[0] = str(float(self.ll[0]) + dx)

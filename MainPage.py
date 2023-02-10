@@ -42,9 +42,10 @@ class MainPage(QMainWindow, Ui_MainWindow):
         self.layer = 'map'  # текущий слой
 
         self.check_click_for_index = False  # показатель из 9 задачи
-        self.point = None  # показатель из 6 задачи
+        self.mapParser.clear_point()  # показатель из 6 задачи
 
         self.set_adress('...')
+        self.show_map()
 
     def check_for_index(self):
         self.check_click_for_index = not self.check_for_index
