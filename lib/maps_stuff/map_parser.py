@@ -40,6 +40,8 @@ class MapParser:
         self.layer = "sat,skl"
         self.zoom = 10
         self.point = None
+        self.full_adress = "..."
+        self.postal_code = None
 
     def get_map_image(self):
         s = requests.Session()
@@ -53,9 +55,17 @@ class MapParser:
         self.layer = layer
         self.map_params["l"] = self.layer
 
-    def clear_point(self):
+    def reset(self):
         self.point = None
         self.refresh_map()
+        self.full_adress = "..."
+        self.postal_code = None
+
+    def get_adress(self):
+        return self.full_adress
+
+    def get_postal_code(self):
+        return self.postal_code
 
     def move(self, dx, dy):
         # print(self.ll)
@@ -76,6 +86,11 @@ class MapParser:
         # Получаем первый топоним из ответа геокодера.
         toponym = json_response["response"]["GeoObjectCollection"][
             "featureMember"][0]["GeoObject"]
+        self.full_adress = toponym["metaDataProperty"]["GeocoderMetaData"]["Address"]["formatted"]
+        try:
+            self.postal_code = toponym["metaDataProperty"]["GeocoderMetaData"]["Address"]["postal_code"]
+        except KeyError:
+            self.postal_code = "None"
         self.ll, spn = get_params(toponym)
         self.point = ",".join(self.ll)
         # Собираем параметры для запроса к StaticMapsAPI:

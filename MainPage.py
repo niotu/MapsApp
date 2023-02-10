@@ -32,6 +32,7 @@ class MainPage(QMainWindow, Ui_MainWindow):
         self.layer_sat_btn.clicked.connect(self.set_layer)
         self.radioButton_3.clicked.connect(self.set_layer)
         self.reset_button.clicked.connect(self.reset)
+        self.checkBox.clicked.connect(self.show_postal_code)
 
     def reset(self):
         self.v_shift = 0  # Сдвиг карты по вертикали
@@ -42,17 +43,28 @@ class MainPage(QMainWindow, Ui_MainWindow):
         self.layer = 'map'  # текущий слой
 
         self.check_click_for_index = False  # показатель из 9 задачи
-        self.mapParser.clear_point()  # показатель из 6 задачи
+        self.mapParser.reset()  # показатель из 6 задачи
 
         self.set_adress('...')
+        self.checkBox.setChecked(False)
         self.show_map()
 
     def check_for_index(self):
         self.check_click_for_index = not self.check_for_index
+        self.checkBox.setChecked(False)
         self.mapParser.search_place(self.mapParser.search_place(self.lineEdit.text()))
         self.mapParser.get_map_image()
         self.show_map()
+        self.set_adress(self.mapParser.get_adress())
         self.maps_view.setFocus()
+
+    def show_postal_code(self):
+        if self.checkBox.isChecked():
+            adress = f"{self.mapParser.get_adress()}, почтовый индекс: {self.mapParser.get_postal_code()}"
+            self.set_adress(adress)
+        else:
+            self.set_adress(self.mapParser.get_adress())
+        self.show_map()
 
     def mousePressEvent(self, event):
         if event.button() == Qt.RightButton:
@@ -83,7 +95,12 @@ class MainPage(QMainWindow, Ui_MainWindow):
     def keyPressEvent(self, event):
         v_shift = 0
         h_shift = 0
-        speed = 1 / self.zoom
+        speed = 2
+        if self.zoom >= 15:
+            speed = 1
+        if self.zoom == 17:
+            speed = 0.5
+        speed = speed / self.zoom ** 2
         if event.key() == Qt.Key_Escape:
             self.maps_view.setFocus()
             print(1)
